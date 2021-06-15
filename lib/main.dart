@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,57 +10,118 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LoginPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController _phoneNumberFieldController;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      backgroundColor: Color.fromARGB(1, 17, 17, 17),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Stack(
+            children: [
+              Image(
+                image: AssetImage('assets/images/login_page_bg.png'),
+                fit: BoxFit.cover,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.center,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      const Color(0x00000000),
+                      const Color(0xCC000000),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 50,
+                left: 34.42,
+                height: 89,
+                width: 261.78,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Kirish",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 43.48,
+                      ),
+                    ),
+                    Text(
+                      "Dasturni to'liq imkoniyatlaridan foydalanish uchun, dasturga kiring.",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 30.0,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.8,
+            //height: MediaQuery.of(context).size.height * 0.50,
+          
+            alignment: Alignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              
+              children: [
+                Text(
+                  "Telefon",
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: (){
+                    FocusScopeNode currentFocus = FocusScope.of(context);
+                    if(!currentFocus.hasPrimaryFocus){
+                      currentFocus.unfocus();
+                    }
+                  },
+                  child: TextField(
+                    controller: _phoneNumberFieldController,
+                   // style: style,
+                    decoration: InputDecoration(
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      hintText: "Telefon raqamingiz",
+                    ),
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      new FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }
