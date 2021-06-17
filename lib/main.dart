@@ -38,22 +38,10 @@ class _LoginPageState extends State<LoginPage> {
                 image: AssetImage('assets/images/login_page_bg.png'),
                 fit: BoxFit.cover,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.center,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      const Color(0x00000000),
-                      const Color(0xCC000000),
-                    ],
-                  ),
-                ),
-              ),
               Positioned(
                 bottom: 50,
                 left: 34.42,
-                height: 89,
+                height: 125,
                 width: 261.78,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                       "Kirish",
                       textAlign: TextAlign.left,
                       style: TextStyle(
+                        fontWeight: FontWeight.bold,
                         color: Colors.white,
                         fontSize: 43.48,
                       ),
@@ -90,12 +79,6 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               
               children: [
-                Text(
-                  "Telefon",
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
                 GestureDetector(
                   onTap: (){
                     FocusScopeNode currentFocus = FocusScope.of(context);
@@ -110,11 +93,11 @@ class _LoginPageState extends State<LoginPage> {
                       hintStyle: TextStyle(
                         color: Colors.grey,
                       ),
-                      hintText: "Telefon raqamingiz",
+                      hintText: "Telefon",
                     ),
                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: [
-                      new FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
+                      new FilteringTextInputFormatter.allow(RegExp("[0-9.+]")),
                     ],
                   ),
                 ),
