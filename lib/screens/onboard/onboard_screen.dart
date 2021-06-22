@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tranning_app/screens/onboard/components/body.dart';
 
 class OnBoardScreen extends StatefulWidget {
 
@@ -9,6 +10,6 @@ class OnBoardScreen extends StatefulWidget {
 class _OnBoardScreenState extends State<OnBoardScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Body();
   }
 }
